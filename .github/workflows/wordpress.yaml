@@ -2,8 +2,6 @@ name: Build Wordpress static Docker Image
 
 on:
   push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -16,6 +14,7 @@ jobs:
       - name: Build Wordpress Docker image
         run: docker build --pull --tag wordpress_static ./
       - name: Tag and push image
+        if: github.ref == 'refs/heads/main'
         run: |
           IMAGE_VERSION=$(docker run --entrypoint /bin/sh wordpress_static -c 'grep "wp_version = " wp-includes/version.php | grep -Eo "[0-9.]+"')
           docker tag wordpress_static "ghcr.io/patrick246/wordpress:$IMAGE_VERSION"
