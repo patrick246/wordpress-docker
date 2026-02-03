@@ -5,7 +5,7 @@ COPY ./download-*.sh ./
 RUN ./download-plugin.sh contact-form-7
 RUN ./download-theme.sh twentyeleven
 
-FROM wordpress:apache@sha256:ed2e8ce3d04065248295cb65eead3a2e29f6f7e008d3ae6d4b36c023fb4964e4
+FROM wordpress:apache@sha256:02d9bfb1a13d467f946552272d068e73d4d9518675fbc794d144ee04d06a709a
 WORKDIR /usr/src/wordpress
 RUN set -eux; \
 	find /etc/apache2 -name '*.conf' -type f -exec sed -ri -e "s!/var/www/html!$PWD!g" -e "s!Directory /var/www/!Directory $PWD!g" '{}' +; \
